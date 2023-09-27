@@ -1,6 +1,7 @@
 import { useState, useRef } from "react"
 import {motion} from 'framer-motion'
 import emailjs from '@emailjs/browser'
+import swal from 'sweetalert';
 
 import { styles } from "../styles"
 import { EarthCanvas } from "./canvas"
@@ -12,6 +13,7 @@ import { slideIn } from "../utils/motion"
 //RvJ7jbZ32oO7b7kkm
 
 const Contact = () => {
+  // sweetAlert();
   const formRef = useRef();
   const [form, setForm] = useState({
     name:'',
@@ -37,7 +39,7 @@ const Contact = () => {
     'RvJ7jbZ32oO7b7kkm'
     ).then(()=>{
       setLoading(false);
-      alert('Thanks for sending me message.');
+      swal("Received!", "Thanks for your message!", "success");
 
       setForm({
         name:'',
@@ -47,7 +49,8 @@ const Contact = () => {
     }, (error) => {
       setLoading(false)
       console.log(error);
-      alert('Something went wrong')
+      swal("Oops...!", "Something went wrong!", "error");
+      // sweetAlert("Oops...", "Something went wrong!", "error");
     })
   }
 
